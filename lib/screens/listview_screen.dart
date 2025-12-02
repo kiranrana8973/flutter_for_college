@@ -14,7 +14,12 @@ class _ListViewScreenState extends State<ListViewScreen> {
   final _lnameController = TextEditingController();
   String? _selectedCity;
 
-  final List<String> _cities = ['Kathmandu', 'Pokhara', 'Chitwan'];
+  final List<DropdownMenuItem<String>> _cities = [
+    // Dropdown items
+    DropdownMenuItem(value: "Chitwan", child: Text("Chitwan")),
+    DropdownMenuItem(value: "Kathmandu", child: Text("Kathmandu")),
+    DropdownMenuItem(value: "Pokhara", child: Text("Pokhara")),
+  ];
 
   @override
   void dispose() {
@@ -78,11 +83,13 @@ class _ListViewScreenState extends State<ListViewScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              DropdownButtonFormField<String>(
-                initialValue: _selectedCity,
+              DropdownButtonFormField(
+                items: _cities,
+                onChanged: (value) {
+                  _selectedCity = value;
+                },
                 decoration: InputDecoration(
                   labelText: 'City',
-                  hintText: 'Select a city',
                   prefixIcon: const Icon(Icons.location_city),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -90,17 +97,6 @@ class _ListViewScreenState extends State<ListViewScreen> {
                   filled: true,
                   fillColor: Colors.grey.shade50,
                 ),
-                items: _cities.map((String city) {
-                  return DropdownMenuItem<String>(
-                    value: city,
-                    child: Text(city),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _selectedCity = newValue;
-                  });
-                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please select a city';
@@ -156,33 +152,10 @@ class _ListViewScreenState extends State<ListViewScreen> {
                 ],
               ),
               const SizedBox(height: 40),
-              Center(
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.grey.shade300, width: 2),
-                  ),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.inbox_outlined,
-                        size: 60,
-                        color: Colors.grey.shade400,
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'No Data',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              Text(
+                "No Data",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 24, color: Colors.grey.shade400),
               ),
             ],
           ),
