@@ -10,16 +10,16 @@ class ListViewScreen extends StatefulWidget {
 
 class _ListViewScreenState extends State<ListViewScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _rollNumberController = TextEditingController();
+  final _fnameController = TextEditingController();
+  final _lnameController = TextEditingController();
   String? _selectedCity;
 
   final List<String> _cities = ['Kathmandu', 'Pokhara', 'Chitwan'];
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _rollNumberController.dispose();
+    _fnameController.dispose();
+    _lnameController.dispose();
     super.dispose();
   }
 
@@ -39,10 +39,10 @@ class _ListViewScreenState extends State<ListViewScreen> {
             children: [
               const SizedBox(height: 20),
               TextFormField(
-                controller: _nameController,
+                controller: _fnameController,
                 decoration: InputDecoration(
-                  labelText: 'Student Name',
-                  hintText: 'Enter student name',
+                  labelText: 'First Name',
+                  hintText: 'Enter first name',
                   prefixIcon: const Icon(Icons.person),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -52,18 +52,18 @@ class _ListViewScreenState extends State<ListViewScreen> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter student name';
+                    return 'Please enter first name';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
               TextFormField(
-                controller: _rollNumberController,
+                controller: _lnameController,
                 decoration: InputDecoration(
-                  labelText: 'Roll Number',
-                  hintText: 'Enter roll number',
-                  prefixIcon: const Icon(Icons.numbers),
+                  labelText: 'Last Name',
+                  hintText: 'Enter last name',
+                  prefixIcon: const Icon(Icons.person_outline),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -72,7 +72,7 @@ class _ListViewScreenState extends State<ListViewScreen> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter roll number';
+                    return 'Please enter last name';
                   }
                   return null;
                 },
@@ -115,18 +115,7 @@ class _ListViewScreenState extends State<ListViewScreen> {
                     child: ElevatedButton.icon(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Student added successfully!'),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
-                          _nameController.clear();
-                          _rollNumberController.clear();
-                          setState(() {
-                            _selectedCity = null;
-                          });
-                          _formKey.currentState!.reset();
+                          //Add student code goes here
                         }
                       },
                       icon: const Icon(Icons.add),
